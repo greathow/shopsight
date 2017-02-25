@@ -250,3 +250,17 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+.DS_Store
+*.csproj.user
+/src/PaperID/src/PaperID/obj
+/src/PaperID/src/PaperID/wwwroot/lib
+/src/PaperID/src/PaperID/Properties/PublishProfiles
+/src/PaperID/src/PaperID/bin
+/src/PaperID/.vs
+.DS_Store
+src/.DS_Store
+src/PaperID/.DS_Store
+src/PaperID/src/.DS_Store
+src/PaperID/src/PaperID/.vscode/launch.json
+src/PaperID/src/PaperID/.vscode/tasks.json
