@@ -1,0 +1,17 @@
+﻿{
+  "1234": {
+    "id": "1234",
+    "location": "rack",
+    "status": "idle"
+  },
+  "12345": {
+    "id": "12345",
+    "location": "rack",
+    "status": "active"
+  },
+  "3": {
+    "id": "3",
+    "location": "rack",
+    "status": "idle"
+  }
+}

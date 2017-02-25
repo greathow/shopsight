@@ -1,0 +1,118 @@
+@using Newtonsoft.Json;
+@using PaperID.Models.TagManagerViewModels
+
+@{
+    ViewData["Title"] = "Tag Manager";
+}
+
+<div class="panel panel-default" style="display:none" data-bind="visible: isLoaded">
+    <div class="panel-heading"><h2>Tags</h2></div>
+    <ul data-bind="foreach: tags" class="list-group">
+        <li class="list-group-item">
+            <div data-bind="visible: !isInEditMode()">
+                <h4><span class="label label-default" data-bind="text:id"></span>&nbsp;<span data-bind="text:title"></span></h4>
+                <dl>
+                    <dt>Manufacturer</dt>
+                    <dd data-bind="text:manufacturer() || 'None Specified'"></dd>
+
+                    <dt>Price</dt>
+                    <dd data-bind="text:price"></dd>
+
+                    <dt>Sale Price</dt>
+                    <dd data-bind="text:salePrice"></dd>
+                </dl>
+                <div><img data-bind="attr: { src: imageUrl }" style="width:100px;height: auto;" /></div>
+                <div><button class="btn btn-default" type="submit" data-bind="click: function() { isInEditMode(true) }">Edit</button></div>
+                <div><button class="btn btn-default" type="submit" data-bind="click: $parent.deleteItem">Delete</button></div>
+            </div>
+            <div data-bind="visible: isInEditMode">
+                <form>
+                    <h4>
+                        <span class="label label-default" data-bind="text:id"></span>
+                        <label class="sr-only" data-bind="attr: { for: elementId('title') }">Title</label>
+                        <input type="text" class="form-control" data-bind="value: title, attr: { id: elementId('title') }" style="display:inline-block;"/>
+                    </h4>
+                    <div class="form-group">
+                        <label data-bind="attr: { for: elementId('manufacturer') }">Manufacturer</label>
+                        <input 
+                               type="text" 
+                               class="form-control" 
+                               data-bind="value: manufacturer, attr: { id: elementId('manufacturer') }" />
+                    </div>
+                    <div>
+                        <label data-bind="attr: { for: elementId('price') }">Price</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" 
+                                   class="form-control" 
+                                   data-bind="value: price, attr: { id: elementId('price') }" />
+                        </div>
+                    </div>
+                    <div>
+                        <label data-bind="attr: { for: elementId('sale-price') }">Sale Price</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" 
+                                   class="form-control" 
+                                   data-bind="value: salePrice, attr: { id: elementId('sale-price') }" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Image <small>(Click to update)</small></label>
+
+                        <label data-bind="attr: { for: elementId('image') }" 
+                               style="display:block;width: 100px; height: 100px;background-color: lightblue;border-style:dashed; border-color: lightgray">
+                            <img data-bind="attr: { src: imageUrl }, visible: imageUrl" 
+                                 style="max-width:100%;max-height: 100%;" />
+                        </label>
+                        <input style="display:none;" 
+                               type="file" 
+                               class="form-control" 
+                               data-bind="event: { change: function() { uploadImage($element.files[0]) } }, attr: { id: elementId('image') }" />
+                        <progress data-bind="visible: uploadState() == 1"></progress>
+                        <div class="alert alert-success" data-bind="visible: uploadState() == 200">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            Image uploaded successfully!  Make sure to click save to persist changes.
+                        </div>
+                        <div class="alert alert-danger" data-bind="visible: uploadState() == 400">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Image failed to upload.
+                        </div>
+                    </div>
+                    <button class="btn btn-default" type="submit" data-bind="click: save">Save</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+    <div class="panel-footer" data-bind="with: newTag">
+        <h3>Add a new tag</h3>
+        <form class="form-inline">
+            <div class="form-group">
+                <label>Tag ID</label>
+                <input type="text" class="form-control" data-bind="value: id" />
+            </div>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" data-bind="value: title" />
+            </div>
+            <button class="btn btn-default" type="submit" data-bind="click: $parent.addTag">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        var viewModel = @Html.Raw(JsonConvert.SerializeObject(Model));
+    </script>
+    <environment names="Development">
+        <script src="~/lib/knockout/dist/knockout.js"></script>
+        <script src="~/lib/knockout-mapping/build/output/knockout.mapping-latest.js"></script>
+        <script src="~/js/tagManager/TagManagerViewModel.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/knockout/dist/knockout.js"></script>
+        <script src="~/lib/knockout-mapping/build/output/knockout.mapping-latest.js"></script>
+        <script src="~/js/tagManager/TagManagerViewModel.js" asp-append-version="true"></script>
+    </environment>
+}

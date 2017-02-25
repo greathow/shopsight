@@ -1,0 +1,319 @@
+@using Newtonsoft.Json;
+@using PaperID.Models.TagManagerViewModels
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" type="text/css" />
+}
+
+@section Scripts {
+    <environment names="Development">
+        <script src="~/lib/knockout/dist/knockout.js"></script>
+        <script src="~/lib/knockout-mapping/build/output/knockout.mapping-latest.js"></script>
+        <script src="~/js/DashboardViewModel.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/knockout/dist/knockout.js"></script>
+        <script src="~/lib/knockout-mapping/build/output/knockout.mapping-latest.js"></script>
+        <script src="~/js/DashboardViewModel.js" asp-append-version="true"></script>
+    </environment>
+}
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs" data-bind="foreach: tabs">
+            <li data-bind="css: { active: $parent.activeTab() == $data }, click: function() { $parent.activeTab($data) }">
+                <a href="#" data-bind="text: displayName"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+    <div class="row">
+        
+        <div class="col-sm-12">
+            <div data-bind="template: {name: activeTab().template }"></div>
+        </div>
+    </div>
+
+<!-- Summary template -->
+<script type="text/html" id="template-page-summary">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Everything</h2>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Interest</th>
+                        <th>Proximity</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: { data: tags }">
+                    <tr>
+                        <td><span class="label label-default" data-bind="text:id"></span></td>
+                        <td><img data-bind="attr: {src:imageUrl}" style="max-height:50px;max-height:50px;"/></td>
+                        <td data-bind="text:title"></td>
+                        <td data-bind="text:location"></td>
+                        <td data-bind="text:interest"></td>
+                        <td data-bind="text:proximity"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>
+
+<!-- Location page Template -->
+<script type="text/html" id="template-page-location">
+    <div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div data-bind="template: { name: 'template-card-list', data: { headerText:'On the rack' ,list: tagsOnRack } }"></div>
+            </div>
+            <div class="col-sm-6">
+                <div data-bind="template: { name: 'template-card-list', data: { headerText:'In the fitting room' ,list: tagsInFitting } }"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- Interest page template-->
+<script type="text/html" id="template-page-interest">
+    <div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div data-bind="template: { name: 'template-card-list', data: { headerText:'Looking at' ,list: tagsByInterestInterested } }"></div>
+            </div>
+            <div class="col-sm-6">
+                <h2>Everything Else</h2>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Interest</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: { data: tags }">
+                        <tr data-bind="css: { success: interest() == 'Interested', info: interest() == 'Browse'}">
+                            <td><span class="label label-default" data-bind="text:id"></span></td>
+                            <td><img data-bind="attr: {src:imageUrl}" style="max-height:40px;max-height:40px;" /></td>
+                            <td data-bind="text:title"></td>
+                            <td data-bind="text:interest"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- Proximity page template -->
+<script type="text-html" id="template-page-proximity">
+    <div>
+        <div class="row" style="min-height: 400px;">
+            <div class="col-sm-12">
+                <div data-bind="template: { name: 'template-card-list', data: { headerText:'Near the shopper', list: tagsByProximityNearShopper, emptyTemplate: 'template-card-empty-proximity' } }"></div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-sm-12">
+                <h2>All items</h2>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Proximity</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: { data: tags }">
+                        <tr data-bind="css: {success: proximity() == 'NearShopper'}">
+                            <td><span class="label label-default" data-bind="text:id"></span></td>
+                            <td><img data-bind="attr: {src:imageUrl}" style="max-height:50px;max-height:50px;" /></td>
+                            <td data-bind="text:title"></td>
+                            <td data-bind="text:proximity"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- Card Template -->
+<script type="text/html" id="template-item-pane">
+    <div>
+        <div class="clearfix">
+            <div class="pull-left" style="height:150px;width:150px;">
+                <img data-bind="attr: { src: imageUrl }" style="height:100%;width:auto"/>
+            </div>
+            <div>
+                <div><span class="label label-default" data-bind="text: id"></span></div>
+                <h2><span data-bind="text: title"></span></h2>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- Vertical Card Panel -->
+<script type="text/html" id="template-card-panel">
+    <h2 data-bind="text: headerText"></h2>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <!-- ko foreach: list -->
+            <div data-bind="template:{ name: 'template-item-pane' }"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+</script>
+
+<!-- Vertical list group -->
+<script type="text/html" id="template-card-list">
+    <h2 data-bind="text: headerText"></h2>
+    <ul class="list-group">
+        <!-- ko foreach: list -->
+        <li class="list-group-item" data-bind="template: {name: 'template-item-pane' }"></li>
+        <!-- /ko -->
+        <!-- ko if: list().count == 0 && emptyTemplate -->
+        <li class="list-group-item" data-bind="template: {name: emptyTemplate }"></li>
+        <!-- /ko -->
+    </ul>
+</script>
+
+<script type="text/html" id="template-card-empty-proximity">
+    <div>Nothing here</div>
+</script>
+<script type="text/html" id="template-table"><div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Location</th>
+                <th>Interest</th>
+                <th>Proximity</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: { data: $data }">
+            <tr>
+                <td data-bind="text:id"></td>
+                <td data-bind="text:location"></td>
+                <td data-bind="text:interest"></td>
+                <td data-bind="text:proximity"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<!-- Table -->
+<script type="text/html" id="template-table-summary">
+    <h2 data-bind="text:headerText"></h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Interest</th>
+                <th>Proximity</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: { data: list }">
+            <tr>
+                <td><span class="label label-default" data-bind="text:id"></span></td>
+                <td><img data-bind="attr: {src:imageUrl}" style="max-height:50px;max-height:50px;" /></td>
+                <td data-bind="text:title"></td>
+                <td data-bind="text:location"></td>
+                <td data-bind="text:interest"></td>
+                <td data-bind="text:proximity"></td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+<!-- Sample display page -->
+<script type="text/html" id="template-page-sample-display">
+    <div class="centerContainer sampleDisplay">
+    <div class="row fader" data-bind="with: activeTag, css: { 'fader-in': activeTag }">
+        <div class="col-sm-5 col-md-5 col-lg-5">
+            <div id="car-1" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#car-1" data-slide-to="0" class="active"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img class="img-responsive" data-bind="attr: {src: imageUrl }" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 col-md-7 col-lg-7">
+            <div>
+                <h1><span data-bind="text: title"></span> <small data-bind="text: manufacturer"></small></h1>
+                <h2>
+                    <!-- ko if: salePrice -->
+                    <span class="label label-success">On Sale!</span>&nbsp;
+                    <del class="text-danger" data-bind="text: '$' + price().toFixed(2)"></del>
+                    <span data-bind="text:'$' + salePrice().toFixed(2)"></span>
+                    <!-- /ko -->
+                    <!-- ko ifnot: salePrice -->
+                    <span data-bind="text:'$' + price().toFixed(2)"></span>
+                    <!-- /ko -->
+                </h2>
+                <hr />
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Available Options</h2>
+                    </div>
+                    <div class="panel-body">
+                        <h3>Size   <span class="label label-success">Fits true to size</span></h3>
+                        <a href="#" class="label label-success">Small</a>
+                        <a href="#" class="label label-success">Medium</a>
+                        <a href="#" class="label label-success">Large</a>
+                        <a href="#" class="label label-success">X-Large</a>
+                        <a href="#" class="label label-success">XX-Large</a>
+                        <a href="#" class="label label-success">XXX-Large</a>
+                    </div>
+                    <div class="panel-body">
+                        <h3>Colors</h3>
+                        <div style="display:inline-block; width: 50px;height:50px;background-color:#E1F2F9"></div>
+                        <div style="display:inline-block; width: 50px;height:50px;background-color:#2F2D32"></div>
+                        <div style="display:inline-block; width: 50px;height:50px;background-color:#F5F3F4"></div>
+                        <div style="display:inline-block; width: 50px;height:50px;background-color:#ECF2E6"></div>
+                        <div style="display:inline-block; width: 50px;height:50px;background-color:#BAB8B9"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- ko ifnot:activeTag -->
+    <div class="row centerItem">
+        <div class="col-sm-12">
+            <div>
+                <img class="dropShadow " src="~/images/shopSightLogo.png" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+</script>
+
+<!-- Retail behavior -->
+<script type="text/html" id="template-page-retail-behavior">
+    <img src="~/images/Mockup.png" class="mockup"/>
+</script>
+
+<script type="text/html" id="template-page-title">
+    <div class="title-slide centerContainer">
+        <img class="dropShadow centerItem" src="~/images/shopSightLogo.png" />
+    </div>
+</script>

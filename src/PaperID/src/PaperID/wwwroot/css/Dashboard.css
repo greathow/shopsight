@@ -1,0 +1,82 @@
+﻿@keyframes example {
+        from {
+            background-color: red;
+        }
+
+        to {
+            background-color: yellow;
+        }
+    }
+    
+    /* The element to apply the animation to */
+.eg-fade-in {
+    transition: 2s;
+}
+.new
+{
+    /*animation-name: example;
+    animation-duration: 4s;*/
+    background-color: yellow !important;
+}
+
+.sampleDisplay {
+    min-height: 400px;
+}
+
+@keyframes dropShadowFrames {
+    0% {
+        filter: drop-shadow(-1px 0px 5px #222);
+    }
+
+    25% {
+        filter: drop-shadow(-1px 0px 5px #e08c20);
+    }
+
+    50% {
+        filter: drop-shadow(-1px 0px 5px #3dae10);
+    }
+
+    75% {
+        filter: drop-shadow(-1px 0px 5px #083a85);
+    }
+
+    100% {
+        filter: drop-shadow(-1px 0px 5px #222);
+    }
+}
+.dropShadow {
+    filter: drop-shadow(-1px 0px 5px #222);
+    animation-name: dropShadowFrames;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.centerContainer > .centerItem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.centerContainer {
+    position:relative;
+}
+
+.fader {
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.fader-in {
+    opacity: 1;
+}
+
+.mockup {
+    width:100%;
+}
+
+.title-slide {
+    height:620px;
+}
