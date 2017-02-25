@@ -254,7 +254,7 @@ paket-files/
 .DS_Store
 *.csproj.user
 /src/PaperID/src/PaperID/obj
-/src/PaperID/src/PaperID/wwwroot/lib
+#/src/PaperID/src/PaperID/wwwroot/lib
 /src/PaperID/src/PaperID/Properties/PublishProfiles
 /src/PaperID/src/PaperID/bin
 /src/PaperID/.vs
