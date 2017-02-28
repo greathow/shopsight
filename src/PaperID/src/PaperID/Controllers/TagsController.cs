@@ -17,7 +17,7 @@ namespace PaperID.Controllers
                 {
                     new TagViewModel()
                     {
-                        ID = "1",
+                        ID = "a001",
                         Title = "Cool Shirt",
                         Price = (decimal)100.00,
                         SalePrice = (decimal)95.00,
@@ -25,10 +25,38 @@ namespace PaperID.Controllers
                     },
                     new TagViewModel()
                     {
-                        ID = "2",
+                        ID = "a002",
                         Title = "Cooler Shirt",
                         Price = (decimal)150.00,
                         ImageUrl = "http://nord.imgix.net/Zoom/12/_12807852.jpg?fit=fill&bg=FFF&fm=jpg&w=860&h=1318&dpr=1.5&q=52.5"
+                    },
+                    new TagViewModel()
+                    {
+                        ID = "a003",
+                        Title = "Shirt",
+                        Price = (decimal)60,
+                        ImageUrl = "http://nord.imgix.net/Zoom/13/_8478973.jpg?fit=fill&bg=FFF&fm=jpg&w=860&h=1318&dpr=2&q=50"
+                    },
+                    new TagViewModel()
+                    {
+                        ID = "a004",
+                        Title = "Pants",
+                        Price = (decimal)80,
+                        ImageUrl = "http://nord.imgix.net/Zoom/13/_8478973.jpg?fit=fill&bg=FFF&fm=jpg&w=860&h=1318&dpr=2&q=50"
+                    },
+                    new TagViewModel()
+                    {
+                        ID = "a005",
+                        Title = "Shorts",
+                        Price = (decimal)45,
+                        ImageUrl = "http://nord.imgix.net/Zoom/13/_8478973.jpg?fit=fill&bg=FFF&fm=jpg&w=860&h=1318&dpr=2&q=50"
+                    },
+                    new TagViewModel()
+                    {
+                        ID = "a006",
+                        Title = "Pants",
+                        Price = (decimal)45,
+                        ImageUrl = "http://nord.imgix.net/Zoom/13/_8478973.jpg?fit=fill&bg=FFF&fm=jpg&w=860&h=1318&dpr=2&q=50"
                     }
                 };
 
@@ -42,8 +70,16 @@ namespace PaperID.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var items = await this.shopSightContext.TaggedItems.ToListAsync();
-            var tags = items.Select(item => ToTagViewModel(item));
+            try
+            {
+                var items = await this.shopSightContext.TaggedItems.ToListAsync();
+                var tags = items.Select(item => ToTagViewModel(item));
+            }
+            catch
+            {
+                return new ObjectResult(TagsController.tags);
+            }
+
             return new ObjectResult(tags);
         }
 

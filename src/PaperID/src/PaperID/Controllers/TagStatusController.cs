@@ -15,11 +15,18 @@ namespace PaperID.Controllers
     public class TagStatusController : Controller
     {
         private ICloudStorageProvider provider;
-        private static readonly Dictionary<string, TagStatusViewModel> statuses = new Dictionary<string, TagStatusViewModel>();
 
-        public TagStatusController(ICloudStorageProvider p)
+        private static readonly Dictionary<string, TagStatusViewModel> statuses = new Dictionary<string, TagStatusViewModel> {
+            { "a001", new TagStatusViewModel("a001") { Interest = TagInterest.Browse, Location = TagLocation.InFittingRoom, Proximity = TagProximity.Unknown }},
+            { "a002", new TagStatusViewModel("a002") { Interest = TagInterest.Interested, Location = TagLocation.OnShelf, Proximity = TagProximity.Unknown }},
+            { "a003", new TagStatusViewModel("a003") { Interest = TagInterest.None, Location = TagLocation.OnShelf, Proximity = TagProximity.NearShopper }},
+            { "a004", new TagStatusViewModel("a004") { Interest = TagInterest.Browse, Location = TagLocation.InFittingRoom, Proximity = TagProximity.NearShopper }},
+            { "a005", new TagStatusViewModel("a005") { Interest = TagInterest.Interested, Location = TagLocation.OnShelf, Proximity = TagProximity.NearShopper }},
+        };
+
+        public TagStatusController(ICloudStorageProvider provider)
         {
-            this.provider = p;
+            this.provider = provider;
         }
 
         public IActionResult Get()
@@ -28,15 +35,8 @@ namespace PaperID.Controllers
         }
 
         [HttpPost]
-        [Route("data")]
-        public async Task<IActionResult> Post([FromBody] Dictionary<string, long> data)
-        {
-            return await this.PostData("data", data);
-        }
-
-        [HttpPost]
         [Route("location")]
-        public async Task<IActionResult> PostLocation([FromBody] Dictionary<string, long> data)
+        public IActionResult PostLocation([FromBody] Dictionary<string, long> data)
         {
             UpdateStatuses(
                 data,
@@ -47,7 +47,7 @@ namespace PaperID.Controllers
 
         [HttpPost]
         [Route("motion")]
-        public async Task<IActionResult> PostMotion([FromBody] Dictionary<string, long> data)
+        public IActionResult PostMotion([FromBody] Dictionary<string, long> data)
         {
             UpdateStatuses(
                 data, 
@@ -58,7 +58,7 @@ namespace PaperID.Controllers
 
         [HttpPost]
         [Route("proximity")]
-        public async Task<IActionResult> PostProximity([FromBody] Dictionary<string, long> data)
+        public IActionResult PostProximity([FromBody] Dictionary<string, long> data)
         {
             UpdateStatuses(
                 data,
@@ -108,18 +108,6 @@ namespace PaperID.Controllers
 
             return JsonConvert.DeserializeObject(jsonString);
 
-        }
-        private async Task<IActionResult> PostData(string logPrefix, Dictionary<string, long> data)
-        {
-            var container = await this.provider.GetImageContainerAsync();
-            var blob = container.GetBlockBlobReference($"log-{logPrefix}-{Guid.NewGuid().ToString()}");
-            blob.Properties.ContentType = "application/json";
-
-            var jsonObj = new { host = this.Request.Host, path = this.Request.Path, query = this.Request.QueryString, value = data };
-            var json = JsonConvert.SerializeObject(jsonObj);
-
-            await blob.UploadTextAsync(json);
-            return this.Ok(jsonObj);
         }
     }
 }
