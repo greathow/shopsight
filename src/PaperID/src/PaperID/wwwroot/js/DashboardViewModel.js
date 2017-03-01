@@ -24,12 +24,12 @@ function DashboardViewModel(data) {
 
     self.tabs = [
         new Tab('title', 'template-page-title', 'Title'),
-        new Tab('temp', 'template-page-proximity-3', "Proximity Heat Map 2"),
-        new Tab('temp', 'template-page-proximity-2', "Proximity Heat Map"),
         new Tab('summary', 'template-page-summary', 'Summary'),
         new Tab('location', 'template-page-location', 'Location'),
         new Tab('interest', 'template-page-interest', 'Interest'),
         new Tab('proximity', 'template-page-proximity', "Proximity"),
+        new Tab('proximity-2', 'template-page-proximity-2', "Proximity Heat Map"),
+        new Tab('proximity-3', 'template-page-proximity-3', "Proximity Heat Map 2"),
         new Tab('sampledisplay', 'template-page-sample-display', 'Sample Display'),
         new Tab('retailbehavior', 'template-page-retail-behavior', "Retail Behavior")
     ];
