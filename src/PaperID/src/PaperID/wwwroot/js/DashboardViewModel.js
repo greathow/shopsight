@@ -24,6 +24,8 @@ function DashboardViewModel(data) {
 
     self.tabs = [
         new Tab('title', 'template-page-title', 'Title'),
+        new Tab('temp', 'template-page-proximity-3', "Proximity Heat Map 2"),
+        new Tab('temp', 'template-page-proximity-2', "Proximity Heat Map"),
         new Tab('summary', 'template-page-summary', 'Summary'),
         new Tab('location', 'template-page-location', 'Location'),
         new Tab('interest', 'template-page-interest', 'Interest'),
@@ -55,6 +57,9 @@ function DashboardViewModel(data) {
     self.tagsByProximityNearShopper = self.filteredTags(function (tag) { return tag.proximity() == "NearShopper" });
     self.tagsByProximityNotNearShopper = self.filteredTags(function (tag) { return tag.proximity() != "NearShopper" });
 
+    self.proximityRackClass = ko.computed(function() {
+        return 'hot-' + Math.min(self.tagsByProximityNearShopper().length, 4);
+    });
     self.activeTag = ko.computed(function () {
         for (var i = 0; i < self.tags().length; i++) {
             var tag = self.tags()[i];
