@@ -200,6 +200,7 @@
     font-size: 20px;
     transform: rotate(90deg);
 }
+
 .rack-rectangle {
     width:100px;
     height: 200px;
@@ -214,15 +215,22 @@
     top: 300px;
 }
 
-.rack-rectangle.rack-3 {
-    left: 250px;
-    top: 165px;
+.rack-rectangle {
+    opacity: .3;
+    transform: scale(.7);
 }
-.rack-rectangle.rack-4 {
+.rack-rectangle.rack-main {
     left: 250px;
-    top: 300px;
+    top: 50%;
+    height: 400px;
+    opacity: 1;
+    transform: scale(1) translateY(-50%);
 }
 
+.rack-rectangle.rack-main .rack-text {
+    transform: rotate(90deg) translateY(25px);
+    font-size: 25px;
+}
 .proximity-3.heatMap {
     height: 530px;
 }
@@ -235,28 +243,28 @@
 
 .item-proximity-tags {
     position: absolute;
-    right:100%;
+    right:0;
     top:0;
-    padding: 0 10px 0 0;
+    padding: 5px 5px 5px 0;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 18px;
     color:black;
 }
 
 .item-proximity-tags > li {
-    height:20px;
-
     display: block;
     border:1px solid black;
+    border-radius: 2px;
+    padding:0 2px;
 }
 .item-proximity {
     position: absolute;
     left:100%;
     top:0px;
-    padding-left:5px;
+    padding:5px 0 5px 5px;
     height:100%;
     display: flex;
     flex-direction: column;
@@ -308,12 +316,6 @@
 
 .item-proximity > li.in-proximity {
     visibility: visible;
-    /*animation-name: proximityAnimation;
-    animation-duration: .5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-delay: 0s;
-    animation-timing-function: ease-out;*/
 }
 
 .ring {
