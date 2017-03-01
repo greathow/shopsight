@@ -184,21 +184,23 @@
 <!-- Proxiity page 2 -->
 <script type="text-html" id="template-page-proximity-3">
     <h1>Shopper Proximity Real-Time Map</h1>
-    <div class="heatMap proximity-3">
-        <div class="rack rack-rectangle rack-1 hot-0">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="heatMap proximity-3">
+                <div class="rack rack-rectangle rack-1 hot-0">
+                </div>
+                <div class="rack rack-rectangle rack-2 hot-0"></div>
+                <div class="rack rack-rectangle rack-3 hot-0"></div>
+                <div class="rack rack-rectangle rack-4" >
+                    <ul class="item-proximity" data-bind="foreach: tags">
+                        <li data-bind="css: { 'in-proximity' : proximity() == 'NearShopper'}"></li>
+                    </ul>
+                </div>
+                <div class="customer-service">Customer Service</div>
+            </div>
         </div>
-        <div class="rack rack-rectangle rack-2 hot-0"></div>
-        <div class="rack rack-rectangle rack-3 hot-0"></div>
-        <div class="rack rack-rectangle rack-4" >
-            <ul class="item-proximity" data-bind="foreach: tags">
-                <li data-bind="css: { 'in-proximity' : proximity() == 'NearShopper'}"></li>
-            </ul>
-        </div>
-        <div class="customer-service">Customer Service</div>
-    </div>
-    <div class="row" >
-            <div class="col-sm-12">
-                <h2>All items</h2>
+        <div class="col-sm-6">
+        <h2>All items</h2>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -217,8 +219,8 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
         </div>
+    </div>
 </script>
 
 <!-- Card Template -->
