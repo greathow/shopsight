@@ -13,7 +13,7 @@ namespace PaperID.Controllers
     [Route("api/Tags")]
     public class TagsController : Controller
     {
-        private static readonly List<TagViewModel> tags = new List<TagViewModel>()
+        private static readonly List<TagViewModel> mockTags = new List<TagViewModel>()
                 {
                     new TagViewModel()
                     {
@@ -70,17 +70,16 @@ namespace PaperID.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
+            var referrer = this.Request.Headers["Referer"].ToString();
+            if (referrer != null && referrer.Contains("mockdata=1"))
+            {
+                return new ObjectResult(TagsController.mockTags);
+            }
+            else
             {
                 var items = await this.shopSightContext.TaggedItems.ToListAsync();
-                var tags = items.Select(item => ToTagViewModel(item));
+                return new ObjectResult(items);
             }
-            catch
-            {
-                return new ObjectResult(TagsController.tags);
-            }
-
-            return new ObjectResult(tags);
         }
 
         [HttpGet("{id}", Name = "GetTag")]

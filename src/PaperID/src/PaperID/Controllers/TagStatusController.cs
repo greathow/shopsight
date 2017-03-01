@@ -16,7 +16,9 @@ namespace PaperID.Controllers
     {
         private ICloudStorageProvider provider;
 
-        private static readonly Dictionary<string, TagStatusViewModel> statuses = new Dictionary<string, TagStatusViewModel> {
+        private static readonly Dictionary<string, TagStatusViewModel> statuses = new Dictionary<string, TagStatusViewModel>();
+
+        private static readonly Dictionary<string, TagStatusViewModel> mockStatuses = new Dictionary<string, TagStatusViewModel> {
             { "a001", new TagStatusViewModel("a001") { Interest = TagInterest.Browse, Location = TagLocation.InFittingRoom, Proximity = TagProximity.Unknown }},
             { "a002", new TagStatusViewModel("a002") { Interest = TagInterest.Interested, Location = TagLocation.OnShelf, Proximity = TagProximity.Unknown }},
             { "a003", new TagStatusViewModel("a003") { Interest = TagInterest.None, Location = TagLocation.OnShelf, Proximity = TagProximity.NearShopper }},
@@ -31,7 +33,14 @@ namespace PaperID.Controllers
 
         public IActionResult Get()
         {
-            return this.Ok(value: statuses);
+            var status = statuses;
+            var referrer = this.Request.Headers["Referer"].ToString();
+            if (referrer != null && referrer.Contains("mockdata=1"))
+            {
+                status = mockStatuses;
+            }
+            
+            return this.Ok(value: status);
         }
 
         [HttpPost]
