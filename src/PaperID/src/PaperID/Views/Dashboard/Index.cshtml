@@ -83,12 +83,37 @@
 
 <!-- Interest page template-->
 <script type="text/html" id="template-page-interest">
-    <div>
+    <div class="page-interest">
         <div class="row">
+            <div class="col-sm-6">
+                <div class="heatMap">
+                    <div class="rack rack-rectangle rack-1">
+                        <div class="rack-text">Shelf</div>
+                    </div>
+                    <div class="rack rack-rectangle rack-2">
+                        <div class="rack-text">Shelf</div>
+                    </div>
+                    <div class="rack rack-rectangle rack-main" >
+                        <div class="rack-text">Shelf</div>                    
+                        <ul class="item-proximity-tags" data-bind="foreach: tags">
+                            <li data-bind="text:id"></li>
+                        </ul>
+                        <ul class="item-proximity" data-bind="foreach: tags">
+                            <li data-bind="css: { 'in-proximity' : interest() == 'Interested'}">
+                                <div class="ring ring1"></div>
+                                <div class="ring ring2"></div>
+                                <div class="ring ring3"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="col-sm-6">
                 <div data-bind="template: { name: 'template-card-list', data: { headerText:'Looking at' ,list: tagsByInterestInterested } }"></div>
             </div>
-            <div class="col-sm-6">
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
                 <h2>Everything Else</h2>
                 <table class="table table-striped table-hover">
                     <thead>
@@ -147,6 +172,7 @@
     </div>
 </script>
 
+<!-- proximity 3-->
 <script type="text-html" id="template-page-proximity-2">
     <h1>Shopper Proximity Real-Time Map</h1>
     <div class="heatMap">
@@ -181,7 +207,7 @@
         </div>
 </script>
 
-<!-- Proxiity page 2 -->
+<!-- Proxiity page 3 -->
 <script type="text-html" id="template-page-proximity-3">
     <h1>Shopper Proximity Real-Time Map</h1>
     <div class="row">

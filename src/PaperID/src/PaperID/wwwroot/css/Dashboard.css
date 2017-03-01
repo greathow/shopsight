@@ -181,7 +181,7 @@
     background-color:red;
     font-size: 70px;
 }
-.proximity-3 .rack {
+.proximity-3 .rack, .page-interest .rack {
     background-color: lightblue;
 }
 
