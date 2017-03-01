@@ -188,12 +188,22 @@
         <div class="col-sm-6">
             <div class="heatMap proximity-3">
                 <div class="rack rack-rectangle rack-1 hot-0">
+                    <div class="rack-text">Shelf</div>
                 </div>
-                <div class="rack rack-rectangle rack-2 hot-0"></div>
-                <div class="rack rack-rectangle rack-3 hot-0"></div>
-                <div class="rack rack-rectangle rack-4" >
+                <div class="rack rack-rectangle rack-2 hot-0">
+                    <div class="rack-text">Shelf</div>
+                </div>
+                <div class="rack rack-rectangle rack-3" >
+                    <div class="rack-text">Shelf</div>                    
+                    <ul class="item-proximity-tags" data-bind="foreach: tags">
+                        <li data-bind="text:id"></li>
+                    </ul>
                     <ul class="item-proximity" data-bind="foreach: tags">
-                        <li data-bind="css: { 'in-proximity' : proximity() == 'NearShopper'}"></li>
+                        <li data-bind="css: { 'in-proximity' : proximity() == 'NearShopper'}">
+                            <div class="ring ring1"></div>
+                            <div class="ring ring2"></div>
+                            <div class="ring ring3"></div>
+                        </li>
                     </ul>
                 </div>
                 <div class="customer-service">Customer Service</div>
