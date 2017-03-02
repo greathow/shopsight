@@ -1,20 +1,20 @@
 ﻿
 @keyframes example {
-        from {
-            background-color: red;
-        }
-
-        to {
-            background-color: yellow;
-        }
+    from {
+        background-color: red;
     }
-    
-    /* The element to apply the animation to */
+
+    to {
+        background-color: yellow;
+    }
+}
+
+/* The element to apply the animation to */
 .eg-fade-in {
     transition: 2s;
 }
-.new
-{
+
+.new {
     /*animation-name: example;
     animation-duration: 4s;*/
     background-color: yellow !important;
@@ -45,6 +45,7 @@
         filter: drop-shadow(-1px 0px 5px #222);
     }
 }
+
 .dropShadow {
     filter: drop-shadow(-1px 0px 5px #222);
     animation-name: dropShadowFrames;
@@ -62,7 +63,7 @@
 }
 
 .centerContainer {
-    position:relative;
+    position: relative;
 }
 
 .fader {
@@ -75,85 +76,84 @@
 }
 
 .mockup {
-    margin-top:20px;
-    width:100%;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .title-slide {
-    height:620px;
+    height: 620px;
 }
 
 .rack {
-    
     border: 2px solid steelblue;
     background: lightgray;
-    
     position: absolute;
-
     display: flex;
-    justify-content:center;
-    align-content:center;
-    flex-direction:column;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
     text-align: center;
     color: white;
-    
 }
 
 .rack-round {
     text-shadow: 0px 0px 20px black;
     font-size: 50px;
     transition: background-color .5s, filter .5s, font-size .5s;
-    
-    width:200px;
+    width: 200px;
     height: 200px;
     border-radius: 50%;
     filter: drop-shadow(0px 0px 20px white)
 }
-.rack-round.rack-1 {
-    left: 50px;
-    top: 20px;
-}
 
-.rack-round.rack-2 {
-    left: 300px;
-    top: 20px;
-}
+    .rack-round.rack-1 {
+        left: 50px;
+        top: 20px;
+    }
 
-.rack-round.rack-3 {
-    left: -75px;
-    top: 250px;
-}
-.rack-round.rack-4 {
-    left: 175px;
-    top: 250px;
-}
+    .rack-round.rack-2 {
+        left: 300px;
+        top: 20px;
+    }
+
+    .rack-round.rack-3 {
+        left: -75px;
+        top: 250px;
+    }
+
+    .rack-round.rack-4 {
+        left: 175px;
+        top: 250px;
+    }
+
 .customer-service {
     left: 400px;
     top: 300px;
     border-radius: 0px;
     width: 200px;
     height: 100px;
-    position:absolute;
+    position: absolute;
     background-color: lightcoral;
     display: flex;
-    justify-content:center;
-    align-content:center;
-    flex-direction:column;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
     text-align: center;
     color: white;
     text-shadow: 0px 0px 20px black;
     font-size: 20px;
     transform: rotate(90deg);
 }
+
 .heatMap {
     border: 1px solid lightgray;
     position: relative;
-    width:100%;
+    width: 100%;
     height: 500px;
     overflow: hidden;
 }
 
-.hot-0{
+.hot-0 {
     filter: drop-shadow(0px 0px 20px lightblue);
     background-color: lightblue;
     font-size: 30px;
@@ -161,7 +161,7 @@
 
 .hot-1 {
     filter: drop-shadow(0px 0px 20px yellow);
-    background-color:yellow;
+    background-color: yellow;
     font-size: 40px;
 }
 
@@ -179,59 +179,63 @@
 
 .hot-4 {
     filter: drop-shadow(0px 0px 20px red);
-    background-color:red;
+    background-color: red;
     font-size: 70px;
 }
+
 .proximity-3 .rack, .page-interest .rack {
     background-color: lightblue;
 }
 
 .rack-text {
     width: 100%;
-    height:100%;
+    height: 100%;
     position: absolute;
     left: 0;
     height: 0;
     color: black;
     display: flex;
-    justify-content:center;
-    align-content:center;
-    flex-direction:column;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
     text-align: center;
     font-size: 20px;
     transform: rotate(90deg);
 }
 
 .rack-rectangle {
-    width:100px;
+    width: 100px;
     height: 200px;
 }
-.rack-rectangle.rack-1 {
-    left: 50px;
-    top: 20px;
-}
 
-.rack-rectangle.rack-2 {
-    left: 50px;
-    top: 300px;
-}
+    .rack-rectangle.rack-1 {
+        left: 50px;
+        top: 20px;
+    }
+
+    .rack-rectangle.rack-2 {
+        left: 50px;
+        top: 300px;
+    }
 
 .rack-rectangle {
     opacity: .3;
     transform: scale(.7);
 }
-.rack-rectangle.rack-main {
-    left: 250px;
-    top: 50%;
-    height: 400px;
-    opacity: 1;
-    transform: scale(1) translateY(-50%);
-}
 
-.rack-rectangle.rack-main .rack-text {
-    transform: rotate(90deg) translateY(25px);
-    font-size: 25px;
-}
+    .rack-rectangle.rack-main {
+        left: 250px;
+        top: 50%;
+        height: 400px;
+        opacity: 1;
+        transform: scale(1) translateY(-50%);
+    }
+
+        .rack-rectangle.rack-main .rack-text {
+            transform: rotate(90deg) translateY(25px);
+            font-size: 25px;
+        }
+
 .proximity-3.heatMap {
     height: 530px;
 }
@@ -244,61 +248,68 @@
 
 .item-proximity-tags {
     position: absolute;
-    right:0;
-    top:0;
+    right: 0;
+    top: 0;
     padding: 5px 5px 5px 0;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-size: 18px;
-    color:black;
+    color: black;
 }
 
-.item-proximity-tags > li {
-    display: block;
-    border:1px solid black;
-    border-radius: 2px;
-    padding:0 2px;
-}
+    .item-proximity-tags > li {
+        display: block;
+        border: 1px solid black;
+        border-radius: 2px;
+        padding: 0 2px;
+    }
+
 .item-proximity {
     position: absolute;
-    left:100%;
-    top:0px;
-    padding:5px 0 5px 5px;
-    height:100%;
+    right:0px;
+    top: 0px;
+    padding: 5px 0 5px 5px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.item-proximity > li {
-    margin-top: 5px;
-    width: 20px;
-    height: 20px;
-    background-color: orange;
-    border-radius:50%;
-    display: block;
-    visibility: hidden;
-    position: relative;
-}
+    .item-proximity > li {
+        margin-top: 5px;
+        width: 20px;
+        height: 20px;
+        background-color: orange;
+        border-radius: 50%;
+        display: block;
+        visibility: hidden;
+        position: relative;
+    }
 
 
 @keyframes ring1 {
     from {
         transform: scale(1);
+        opacity: 1;
     }
+
     to {
-        transform: scale(2.0);
+        transform: scale(5);
+        opacity: 0;
     }
 }
 
 @keyframes ring2 {
     from {
         transform: scale(1);
+        opacity: 1;
     }
+
     to {
-        transform: scale(1.5);
+        transform: scale(5);
+        opacity: 0;
     }
 }
 
@@ -308,6 +319,7 @@
         transform: scale(.75);
         filter: drop-shadow(0px 0px 10px orange);
     }
+
     to {
         background-color: red;
         transform: scale(1);
@@ -321,33 +333,44 @@
 
 .ring {
     position: absolute;
-    width:100%;
+    width: 100%;
     height: 100%;
     left: 0;
-    top:0;
+    top: 0;
     border-radius: 50%;
+    opacity: .4;
+    animation-name: ring1;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 .ring1 {
-background-color: rgba(255, 0, 0, .4);
-    animation-name: ring1;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
     animation-delay: 0s;
-    animation-timing-function: ease-out;
 }
 
 .ring2 {
-    background-color: rgba(255, 0, 0, .6);
-    animation-name: ring2;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-delay: 0s;
-    animation-timing-function: ease-out;
+    animation-delay: 1s;
 }
 
 .ring3 {
-    background-color: rgba(255, 0, 0, 1);
+    animation-delay: 2s;
+}
+
+/* Page interest specific */
+.page-interest .ring {
+    background-color: orange;
+}
+
+.page-interest .item-proximity {
+    transform:translateX(-70%)
+}
+/* Proxmity specific*/
+
+.proximity-3 .ring {
+    background-color: rgb(18,36,224);
+}
+
+.proximity-3 .item-proximity {
+    transform:translateX(200%);
 }
