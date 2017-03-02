@@ -374,3 +374,15 @@
 .proximity-3 .item-proximity {
     transform:translateX(200%);
 }
+
+.item-card-picture {
+    height: 150px;
+    width: 150px;
+    float: left !important;
+}
+
+.page-interest .list-group > .list-group-item:only-child .item-card-picture {
+    height:300px;
+    width: 100%;
+    text-align:center;
+}
