@@ -23,7 +23,7 @@ namespace PaperID.Controllers
             { "a002", new TagStatusViewModel("a002") { Interest = TagInterest.Interested, Location = TagLocation.OnShelf, Proximity = TagProximity.Unknown }},
             { "a003", new TagStatusViewModel("a003") { Interest = TagInterest.None, Location = TagLocation.OnShelf, Proximity = TagProximity.NearShopper }},
             { "a004", new TagStatusViewModel("a004") { Interest = TagInterest.Browse, Location = TagLocation.InFittingRoom, Proximity = TagProximity.NearShopper }},
-            { "a005", new TagStatusViewModel("a005") { Interest = TagInterest.Interested, Location = TagLocation.OnShelf, Proximity = TagProximity.NearShopper }},
+            { "a005", new TagStatusViewModel("a005") { Interest = TagInterest.Browse, Location = TagLocation.OnShelf, Proximity = TagProximity.NearShopper }},
         };
 
         public TagStatusController(ICloudStorageProvider provider)
@@ -34,10 +34,19 @@ namespace PaperID.Controllers
         public IActionResult Get()
         {
             var status = statuses;
-            var referrer = this.Request.Headers["Referer"].ToString();
-            if (referrer != null && referrer.Contains("mockdata=1"))
+            var mockData = this.Request.MockDataScenario();
+            if (mockData.HasValue && mockData.Value == 1)
             {
                 status = mockStatuses;
+            } else if (mockData.HasValue && mockData.Value == 2)
+            {
+                status = new Dictionary<string, TagStatusViewModel>(mockStatuses);
+                status["a005"] = new TagStatusViewModel("a005")
+                {
+                    Interest = TagInterest.Interested,
+                    Location = TagLocation.OnShelf,
+                    Proximity = TagProximity.NearShopper
+                };
             }
             
             return this.Ok(value: status);

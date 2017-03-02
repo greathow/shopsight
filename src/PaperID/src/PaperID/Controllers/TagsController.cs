@@ -71,7 +71,7 @@ namespace PaperID.Controllers
         public async Task<IActionResult> Get()
         {
             var referrer = this.Request.Headers["Referer"].ToString();
-            if (referrer != null && referrer.Contains("mockdata=1"))
+            if (this.Request.MockDataScenario().HasValue)
             {
                 return new ObjectResult(TagsController.mockTags);
             }

@@ -382,7 +382,16 @@
 }
 
 .page-interest .list-group > .list-group-item:only-child .item-card-picture {
-    height:300px;
+    height: 300px;
     width: 100%;
-    text-align:center;
+    text-align: center;
+    float: none !important;
+}
+
+.page-interest .list-group > .list-group-item:only-child .item-card-caption {
+    text-align: center;
+}
+
+.page-interest .list-group > .list-group-item:only-child .item-card-caption .label {
+    display:none;
 }
