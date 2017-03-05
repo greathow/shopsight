@@ -44,10 +44,9 @@ namespace PaperID
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-            
+
             // Add application services.
-            services.AddDbContext<ShopSightContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ShopSightContext>(options => options.UseSqlite("Filename=./ShopSight.db"));
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, TwilioSmsSender>();
             services.Configure<SiteConfiguration>(Configuration.GetSection("SiteSettings"));
