@@ -395,3 +395,7 @@
 .page-interest .list-group > .list-group-item:only-child .item-card-caption .label {
     display:none;
 }
+
+.page-location .item-card-caption h2 {
+    font-size: 45px;
+}
