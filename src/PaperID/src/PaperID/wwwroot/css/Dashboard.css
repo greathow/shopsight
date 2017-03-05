@@ -378,7 +378,6 @@
 .item-card-picture {
     height: 150px;
     width: 150px;
-    float: left !important;
 }
 
 .page-interest .list-group > .list-group-item:only-child .item-card-picture {
@@ -414,4 +413,13 @@
 
 .page-location .card-list-header {
     text-align:center;
+}
+
+.item-card-caption, .item-card-picture {
+    display:inline-block;
+    vertical-align:top;
+}
+
+.item-card-caption {
+    padding-left:10px;
 }
