@@ -397,5 +397,21 @@
 }
 
 .page-location .item-card-caption h2 {
-    font-size: 45px;
+
+}
+
+.page-location .on-rack .list-group-item {
+    width:50%;
+    /*vertical-align:middle;*/
+    /*display:inline-block;*/
+    /*font-size: 60px;*/
+}
+
+.page-location .on-rack .list-group {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.page-location .card-list-header {
+    text-align:center;
 }

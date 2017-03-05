@@ -71,10 +71,10 @@
 <script type="text/html" id="template-page-location">
     <div>
         <div class="row page-location">
-            <div class="col-sm-6">
+            <div class="col-sm-6 on-rack">
                 <div data-bind="template: { name: 'template-card-list', data: { headerText:'On the rack' ,list: tagsOnRack } }"></div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 in-dressing-room">
                 <div data-bind="template: { name: 'template-card-list', data: { headerText:'In the fitting room' ,list: tagsInFitting } }"></div>
             </div>
         </div>
@@ -86,6 +86,7 @@
     <div class="page-interest">
         <div class="row">
             <div class="col-sm-6">
+                <h2>Item Movement Real-Time Map</h2>
                 <div class="heatMap">
                     <div class="rack rack-rectangle rack-1">
                         <div class="rack-text">Shelf</div>
@@ -209,9 +210,9 @@
 
 <!-- Proxiity page 3 -->
 <script type="text-html" id="template-page-proximity-3">
-    <h1>Shopper Proximity Real-Time Map</h1>
     <div class="row">
         <div class="col-sm-6">
+            <h2>Shopper Proximity Real-Time Map</h2>
             <div class="heatMap proximity-3">
                 <div class="rack rack-rectangle rack-1">
                     <div class="rack-text">Shelf</div>
@@ -288,7 +289,7 @@
 
 <!-- Vertical list group -->
 <script type="text/html" id="template-card-list">
-    <h2 data-bind="text: headerText"></h2>
+    <h2 class="card-list-header" data-bind="text: headerText"></h2>
     <ul class="list-group">
         <!-- ko foreach: list -->
         <li class="list-group-item" data-bind="template: {name: 'template-item-pane' }"></li>
