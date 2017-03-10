@@ -399,20 +399,23 @@
 
 }
 
-.page-location .on-rack .list-group-item {
+.page-location .on-rack .list-group-item,
+.page-location .in-dressing-room .list-group-item {
     width:50%;
     /*vertical-align:middle;*/
     /*display:inline-block;*/
     /*font-size: 60px;*/
 }
 
-.page-location .on-rack .list-group {
+.page-location .on-rack .list-group,
+.page-location .in-dressing-room .list-group {
     display:flex;
     flex-wrap:wrap;
 }
 
 .page-location .card-list-header {
     text-align:center;
+    font-weight: bold;
 }
 
 .item-card-caption, .item-card-picture {
@@ -422,4 +425,16 @@
 
 .item-card-caption {
     padding-left:10px;
+}
+
+.card-list-header, .table-list-header, .bold-title {
+    font-weight: bold;
+}
+
+.on-rack {
+    padding-right:30px;
+}
+
+.in-dressing-room {
+    padding-left: 30px;
 }
