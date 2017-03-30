@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +38,7 @@ namespace PaperID
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlLiteOrSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -46,7 +47,8 @@ namespace PaperID
             services.AddMvc();
 
             // Add application services.
-            services.AddDbContext<ShopSightContext>(options => options.UseSqlite("Filename=./ShopSight.db"));
+            services.AddDbContext<ShopSightContext>(options =>
+                options.UseSqlLiteOrSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, TwilioSmsSender>();
             services.Configure<SiteConfiguration>(Configuration.GetSection("SiteSettings"));
