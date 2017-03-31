@@ -23,18 +23,18 @@ function DashboardViewModel(data) {
     self.tags = ko.observableArray([]);
 
     self.tabs = [
-        new Tab('title', 'template-page-title', 'Title'),
+        //new Tab('title', 'template-page-title', 'Title'),
         new Tab('summary', 'template-page-summary', 'Summary'),
         new Tab('location', 'template-page-location', 'Location'),
         new Tab('interest', 'template-page-interest', 'Interest'),
         new Tab('proximity-3', 'template-page-proximity-3', "Proximity Heat Map"),
         //new Tab('proximity', 'template-page-proximity', "Proximity"),
         //new Tab('proximity-2', 'template-page-proximity-2', "Proximity Heat Map"),
-        new Tab('sampledisplay', 'template-page-sample-display', 'Sample Display'),
+        //new Tab('sampledisplay', 'template-page-sample-display', 'Sample Display'),
         new Tab('retailbehavior', 'template-page-retail-behavior', "Retail Behavior")
     ];
 
-    self.activeTab = ko.observable(self.tabs[1]);
+    self.activeTab = ko.observable(self.tabs[0]);
 
     self.filteredTags = function (filter) {
         return ko.computed(function () {
